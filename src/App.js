@@ -6,6 +6,7 @@ import produce from 'immer';
 import Start from './Start_Screen';
 import Controls from './Controls';
 import Game from './Game';
+import SideBar from './SideBar';
 
 //styles
 import './App.scss';
@@ -31,11 +32,11 @@ function App() {
 
   //speed controls
   const [simSpeed, setSimSpeed] = useState(1000);
-  const [speedIncrement, setSpeedIncrement] = useState();
+
   const [speedDisplay, setSpeedDisplay] = useState(1);
 
   const [genCount, setGenCount] = useState(1)
-  const [squareSize] = useState(12);
+  const [squareSize] = useState(rowsCount * 0.25);
   const [isRunning, setIsRunning] = useState(false);
 
   const [grid, setGrid] = useState(() => {
@@ -93,14 +94,6 @@ function App() {
     setTimeout(runSimulation, simSpeedRef.current);
   }, []);
 
-  useEffect(() => {
-    if (simSpeed <= 0) {
-      setSpeedIncrement(0)
-    } else {
-      setSpeedIncrement(100)
-    }
-  }, [simSpeed])
-
   return (
     <div className="App">
 
@@ -110,6 +103,7 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
+          runSimulation={runSimulation}
           setGrid={setGrid}
           rowsCount={rowsCount}
           colsCount={colsCount}
@@ -119,19 +113,28 @@ function App() {
           setSpeedDisplay={setSpeedDisplay}
           genCount={genCount}
           setGenCount={setGenCount}
-          isRunningRef={isRunningRef}
-          runSimulation={runSimulation}
-          running={isRunning}
           setIsRunning={setIsRunning}
+          isRunningRef={isRunningRef}
         />
 
-        <Game
-          isRunning={isRunning}
-          squareSize={squareSize}
-          grid={grid}
-          setGrid={setGrid}
-          colsCount={colsCount}
-        />
+        <div className='mainGameCont'>
+          <Game
+            isRunning={isRunning}
+            squareSize={squareSize}
+            grid={grid}
+            setGrid={setGrid}
+            colsCount={colsCount}
+          />
+
+          <SideBar
+            setIsRunning= {setIsRunning} 
+            isRunningRef= {isRunningRef}
+            setGenCount= {setGenCount}
+            setGrid= {setGrid}
+            rowsCount= {rowsCount}
+            colsCount= {colsCount}
+          />
+        </div>
       </Route>
     </div>
   );

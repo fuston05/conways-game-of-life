@@ -30,13 +30,6 @@ export const clearGrid = (
     })
   })
 }
-/**
- * setIsRunning,
-        setGenCount,
-        setGrid,
-        rowsCount,
-        colsCount
- */
 
 export const randomGrid = (
   setIsRunning,
