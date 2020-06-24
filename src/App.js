@@ -26,7 +26,7 @@ const operations= [
 ];
 
 function App() {
-  const [squareSize, setSquareSize] = useState(20);
+  const [squareSize] = useState(20);
   const [grid, setGrid] = useState(() => {
     const rows = [];
 
@@ -41,9 +41,10 @@ function App() {
   isRunningRef.current = isRunning;
 
   const runSimulation = useCallback(() => {
-    if (!isRunningRef) {
+    if (!isRunningRef.current) {
       return;
     }
+
     setGrid((currentGrid) => {
       return produce(currentGrid, gridCopy => {
         //loop through every cell in the grid
@@ -60,17 +61,19 @@ function App() {
                 neighbors+= currentGrid[newI][newK];
               }//end if
             })
+
+            // apply game rules logic
             if(neighbors < 2 || neighbors > 3){
               // kill cell
               gridCopy[i][k]= 0;
+            }else if(currentGrid[i][k] === 0 && neighbors === 3){
+              // bring to life
+              gridCopy[i][k]= 1;
             }
-
           }//end cols loop
         }//end rows loop
-
       })
     })//end setGrid
-    const newGrid = produce();
 
     setTimeout(runSimulation, 1000);
   }, []);
@@ -83,8 +86,10 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
+          isRunningRef= {isRunningRef}
+          runSimulation= {runSimulation}
           running={isRunning}
-          setRunning={setIsRunning}
+          setIsRunning={setIsRunning}
         />
 
         <Game

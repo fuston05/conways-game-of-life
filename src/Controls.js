@@ -1,15 +1,16 @@
 import React from 'react'
 import './Controls.scss';
 
-const Controls = ({ isRunning, setIsRunning }) => {
+const Controls = ({setIsRunning, isRunningRef, runSimulation }) => {
   return (
     <div className='controlsCont'>
       <button
         onClick={() => {
-          setIsRunning(!isRunning)
+          setIsRunning(!isRunningRef.current);
+          runSimulation();
         }}
       >
-        {isRunning ? 'Stop' : 'Start'}
+        {isRunningRef.current ? 'Stop' : 'Start'}
       </button>
       <button>faster &raquo;</button>
       <button>Slower &laquo;</button>

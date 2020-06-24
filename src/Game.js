@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import produce from 'immer';
 
 //styles
 import './Game.scss';
 
-const Game = ({squareSize, grid, colsCount }) => {
+const Game = ({squareSize, grid, setGrid, colsCount }) => {
 
   return (
     <div
@@ -20,13 +21,16 @@ const Game = ({squareSize, grid, colsCount }) => {
             return <div
               key={`${i}-${k}`}
               onClick= {() => {
-                console.log('clicked')
+                const newGrid= produce(grid, gridCopy => {
+                  gridCopy[i][k]= grid[i][k] ? 0 : 1;
+                })
+                setGrid(newGrid);
               }}
 
               style={{
                 width: squareSize,
                 height: squareSize,
-                backgroundColor: grid[i][k] === 1 ? 'black' : undefined,
+                backgroundColor: grid[i][k] === 1 ? 'green' : undefined,
                 border: '1px solid black',
                 marginBottom: '-1px'
               }} />
