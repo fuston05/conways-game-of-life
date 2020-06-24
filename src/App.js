@@ -27,7 +27,22 @@ const operations = [
 
 function App() {
 
-  const [genCount, setGenCount] = useState(0)
+  const clearGrid= () => {
+    console.log('clear fired');
+    setIsRunning(false);
+    setGenCount(1);
+    setGrid((currentGrid) => {
+      return produce(currentGrid, gridCopy => {
+        for(let i= 0; i < rowsCount; i++){
+          for(let k= 0; k < colsCount; k++){
+            gridCopy[i][k]= 0;
+          }
+        }
+      })
+    })
+  }
+
+  const [genCount, setGenCount] = useState(1)
   const [squareSize] = useState(20);
   const [grid, setGrid] = useState(() => {
     const rows = [];
@@ -49,6 +64,7 @@ function App() {
       return;
     }
     setGenCount(c => c + 1);
+
     setGrid((currentGrid) => {
       return produce(currentGrid, gridCopy => {
         //loop through every cell in the grid
@@ -90,6 +106,7 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
+          clearGrid= {clearGrid}
           genCount={genCount}
           isRunningRef={isRunningRef}
           runSimulation={runSimulation}
