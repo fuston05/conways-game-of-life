@@ -1,11 +1,16 @@
 import React from 'react'
-import './Controls.css';
+import './Controls.scss';
 
-const Controls = () => {
+const Controls = ({ isRunning, setIsRunning }) => {
   return (
-    <div className= 'controlsCont'>
-      <button>Start</button>
-      <button>Stop</button>
+    <div className='controlsCont'>
+      <button
+        onClick={() => {
+          setIsRunning(!isRunning)
+        }}
+      >
+        {isRunning ? 'Stop' : 'Start'}
+      </button>
       <button>faster &raquo;</button>
       <button>Slower &laquo;</button>
       <button>Reset Board</button>

@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Route } from 'react-router-dom';
+import produce from 'immer';
 
 //components
 import Start from './Start_Screen';
 import Controls from './Controls';
 import Game from './Game';
 
+//styles
+import './App.scss';
+
 // set grid size
-const rowsCount = 25;
+const rowsCount = 30;
 const colsCount = rowsCount;
+
+const operations= [
+  [0, 1], 
+  [0, -1], 
+  [1, -1], 
+  [-1, 1], 
+  [1, 1], 
+  [-1, -1], 
+  [1, 0], 
+  [-1, 0]
+];
 
 function App() {
   const [squareSize, setSquareSize] = useState(20);
@@ -19,7 +34,46 @@ function App() {
       rows.push(Array.from(Array(colsCount), () => 0))
     }
     return rows;
-  })
+  });
+  const [isRunning, setIsRunning] = useState(false);
+
+  const isRunningRef = useRef(isRunning);
+  isRunningRef.current = isRunning;
+
+  const runSimulation = useCallback(() => {
+    if (!isRunningRef) {
+      return;
+    }
+    setGrid((currentGrid) => {
+      return produce(currentGrid, gridCopy => {
+        //loop through every cell in the grid
+        for (let i = 0; i < rowsCount; i++) {
+          for (let k = 0; k < colsCount; k++) {
+
+            //get number of live neighbors
+            let neighbors= 0;
+            operations.forEach(([x, y]) => {
+              const newI= i + x;
+              const newK= k + y;
+              // check grid bounds
+              if( newI >= 0 && newI < rowsCount && newK >= 0 && newK < colsCount ){
+                neighbors+= currentGrid[newI][newK];
+              }//end if
+            })
+            if(neighbors < 2 || neighbors > 3){
+              // kill cell
+              gridCopy[i][k]= 0;
+            }
+
+          }//end cols loop
+        }//end rows loop
+
+      })
+    })//end setGrid
+    const newGrid = produce();
+
+    setTimeout(runSimulation, 1000);
+  }, []);
 
   return (
     <div className="App">
@@ -28,11 +82,15 @@ function App() {
       </Route>
 
       <Route exact path='/game'>
-        <Controls />
-        
+        <Controls
+          running={isRunning}
+          setRunning={setIsRunning}
+        />
+
         <Game
           squareSize={squareSize}
           grid={grid}
+          setGrid={setGrid}
           colsCount={colsCount}
         />
       </Route>
