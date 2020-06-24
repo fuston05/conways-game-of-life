@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import produce from 'immer';
 
@@ -9,10 +9,6 @@ import Game from './Game';
 
 //styles
 import './App.scss';
-
-// set grid size
-const rowsCount = 30;
-const colsCount = rowsCount;
 
 const operations = [
   [0, 1],
@@ -25,36 +21,14 @@ const operations = [
   [-1, 0]
 ];
 
+
 function App() {
 
-  const clearGrid= () => {
-    setIsRunning(false);
-    setGenCount(1);
-    setGrid((currentGrid) => {
-      return produce(currentGrid, gridCopy => {
-        for(let i= 0; i < rowsCount; i++){
-          for(let k= 0; k < colsCount; k++){
-            gridCopy[i][k]= 0;
-          }
-        }
-      })
-    })
-  }
+  // set grid size
+  const [rowsCount, setRowsCount] = useState(30);
+  const [colsCount, setColsCount] = useState(rowsCount);
 
-  const randomGrid= () => {
-    setIsRunning(false);
-    setGenCount(1);
-
-    setGrid((currentGrid) => {
-      return produce(currentGrid, gridCopy => {
-        for(let i= 0; i < rowsCount; i++){
-          for(let k= 0; k < colsCount; k++){
-            Math.random() < 0.5 ? gridCopy[i][k]= 0 : gridCopy[i][k]= 1
-          }
-        }
-      })
-    })
-  }
+  const [simSpeed, setSimSpeed] = useState(1000);
 
   const [genCount, setGenCount] = useState(1)
   const [squareSize] = useState(20);
@@ -68,10 +42,59 @@ function App() {
 
   });
 
+
   const [isRunning, setIsRunning] = useState(false);
+
+  const clearGrid = () => {
+    setIsRunning(false);
+    setGenCount(1);
+    setGrid((currentGrid) => {
+      return produce(currentGrid, gridCopy => {
+        for (let i = 0; i < rowsCount; i++) {
+          for (let k = 0; k < colsCount; k++) {
+            gridCopy[i][k] = 0;
+          }
+        }
+      })
+    })
+  }
+
+  const randomGrid = () => {
+    setIsRunning(false);
+    setGenCount(1);
+
+    setGrid((currentGrid) => {
+      return produce(currentGrid, gridCopy => {
+        for (let i = 0; i < rowsCount; i++) {
+          for (let k = 0; k < colsCount; k++) {
+            Math.random() < 0.5 ? gridCopy[i][k] = 0 : gridCopy[i][k] = 1
+          }
+        }
+      })
+    })
+  }
+
+  const simSpeedRef = useRef(simSpeed);
+  simSpeedRef.current = simSpeed;
+
+  const [speedIncrement, setSpeedIncrement] = useState(() => {
+
+  });
+
+  console.log(`step: ${speedIncrement}`);
 
   const isRunningRef = useRef(isRunning);
   isRunningRef.current = isRunning;
+
+  console.log(`speed: ${simSpeedRef.current}`);
+
+  useEffect(() => {
+    if (simSpeed <= 0) {
+      setSpeedIncrement(0)
+    } else {
+      setSpeedIncrement(100)
+    }
+  }, [simSpeed])
 
   const runSimulation = useCallback(() => {
     if (!isRunningRef.current) {
@@ -109,7 +132,7 @@ function App() {
       })
     })//end setGrid
 
-    setTimeout(runSimulation, 1000);
+    setTimeout(runSimulation, simSpeedRef.current);
   }, []);
 
   return (
@@ -120,8 +143,10 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
-          randomGrid= {randomGrid}
-          clearGrid= {clearGrid}
+          speedIncrement={speedIncrement}
+          setSimSpeed={setSimSpeed}
+          randomGrid={randomGrid}
+          clearGrid={clearGrid}
           genCount={genCount}
           isRunningRef={isRunningRef}
           runSimulation={runSimulation}
