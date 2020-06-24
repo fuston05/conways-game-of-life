@@ -3,7 +3,7 @@ import './Controls.scss';
 
 //utils
 import {speedUpSim, slowDownSim} from './utils/speedControls';
-import {clearGrid} from './utils/gridFunctions';
+import {clearGrid, randomGrid} from './utils/gridFunctions';
 
 const Controls = ({
   genCount,
@@ -13,7 +13,6 @@ const Controls = ({
   runSimulation,
   speedDisplay,
   setSpeedDisplay,
-  randomGrid,
   setSimSpeed,
   simSpeed,
   setGrid,
@@ -43,7 +42,14 @@ const Controls = ({
         {isRunningRef.current ? 'Stop' : 'Start'}
       </button>
 
-      <button onClick={() => randomGrid()}>Randomize Grid</button>
+      <button onClick={() => randomGrid(
+        setIsRunning,
+        isRunningRef,
+        setGenCount,
+        setGrid,
+        rowsCount,
+        colsCount
+      )}>Randomize Grid</button>
       <button onClick={() => speedUpSim(
         simSpeed,
         setSimSpeed,

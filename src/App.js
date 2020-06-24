@@ -2,9 +2,6 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import produce from 'immer';
 
-//utils
-import {clearGrid} from './utils/gridFunctions';
-
 //components
 import Start from './Start_Screen';
 import Controls from './Controls';
@@ -29,7 +26,7 @@ const operations = [
 function App() {
 
   // set grid size
-  const [rowsCount, setRowsCount] = useState(30);
+  const [rowsCount, setRowsCount] = useState(50);
   const [colsCount, setColsCount] = useState(rowsCount);
 
   //speed controls
@@ -38,7 +35,7 @@ function App() {
   const [speedDisplay, setSpeedDisplay] = useState(1);
 
   const [genCount, setGenCount] = useState(1)
-  const [squareSize] = useState(20);
+  const [squareSize] = useState(12);
   const [isRunning, setIsRunning] = useState(false);
 
   const [grid, setGrid] = useState(() => {
@@ -49,25 +46,6 @@ function App() {
     }
     return rows;
   });
-
-  const randomGrid = () => {
-    if(isRunning){
-      alert('You must stop the game first');
-      return;
-    }
-    setIsRunning(false);
-    setGenCount(1);
-
-    setGrid((currentGrid) => {
-      return produce(currentGrid, gridCopy => {
-        for (let i = 0; i < rowsCount; i++) {
-          for (let k = 0; k < colsCount; k++) {
-            Math.random() < 0.5 ? gridCopy[i][k] = 0 : gridCopy[i][k] = 1
-          }
-        }
-      })
-    })
-  }
 
   // refs
   const simSpeedRef = useRef(simSpeed);
@@ -125,22 +103,22 @@ function App() {
 
   return (
     <div className="App">
+
       <Route exact path='/'>
         <Start />
       </Route>
 
       <Route exact path='/game'>
         <Controls
-          setGrid= {setGrid}
-          rowsCount= {rowsCount}
-          colsCount= {colsCount}
-          setSimSpeed= {setSimSpeed}
-          simSpeed= {simSpeed}
+          setGrid={setGrid}
+          rowsCount={rowsCount}
+          colsCount={colsCount}
+          setSimSpeed={setSimSpeed}
+          simSpeed={simSpeed}
           speedDisplay={speedDisplay}
-          setSpeedDisplay= {setSpeedDisplay}
-          randomGrid={randomGrid}
+          setSpeedDisplay={setSpeedDisplay}
           genCount={genCount}
-          setGenCount= {setGenCount}
+          setGenCount={setGenCount}
           isRunningRef={isRunningRef}
           runSimulation={runSimulation}
           running={isRunning}
@@ -148,7 +126,7 @@ function App() {
         />
 
         <Game
-          isRunning= {isRunning}
+          isRunning={isRunning}
           squareSize={squareSize}
           grid={grid}
           setGrid={setGrid}
