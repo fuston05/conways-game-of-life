@@ -10,6 +10,7 @@ import Game from './Game';
 //styles
 import './App.scss';
 
+// checking neighbor operations
 const operations = [
   [0, 1],
   [0, -1],
@@ -28,10 +29,15 @@ function App() {
   const [rowsCount, setRowsCount] = useState(30);
   const [colsCount, setColsCount] = useState(rowsCount);
 
+  //speed controls
   const [simSpeed, setSimSpeed] = useState(1000);
+  const [speedIncrement, setSpeedIncrement] = useState();
+  const [speedDisplay, setSpeedDisplay] = useState(1);
 
   const [genCount, setGenCount] = useState(1)
   const [squareSize] = useState(20);
+  const [isRunning, setIsRunning] = useState(false);
+
   const [grid, setGrid] = useState(() => {
     const rows = [];
 
@@ -39,15 +45,37 @@ function App() {
       rows.push(Array.from(Array(colsCount), () => 0))
     }
     return rows;
-
   });
 
+  //functions
+  const speedUpSim= () => {
+    if(simSpeed === 100){
+      setSimSpeed(simSpeed);
+    }else if(simSpeed > 100){
+      setSimSpeed(s => s-100);
+      setSpeedDisplay(c => c + 1)
+    }
+  }
 
-  const [isRunning, setIsRunning] = useState(false);
+  const slowDownSim= () => {
+    if(simSpeed === 1000){
+      setSimSpeed(simSpeed);
+    }else if(simSpeed <= 1900){
+      setSimSpeed(s => s+100);
+      setSpeedDisplay(c => c - 1)
+    }
+  }
 
   const clearGrid = () => {
+    if(isRunning){
+      alert('You must stop the game first');
+      return;
+    }
     setIsRunning(false);
     setGenCount(1);
+    setSpeedDisplay(1);
+    setSimSpeed(1000);
+
     setGrid((currentGrid) => {
       return produce(currentGrid, gridCopy => {
         for (let i = 0; i < rowsCount; i++) {
@@ -60,6 +88,10 @@ function App() {
   }
 
   const randomGrid = () => {
+    if(isRunning){
+      alert('You must stop the game first');
+      return;
+    }
     setIsRunning(false);
     setGenCount(1);
 
@@ -74,27 +106,12 @@ function App() {
     })
   }
 
+  // refs
   const simSpeedRef = useRef(simSpeed);
   simSpeedRef.current = simSpeed;
 
-  const [speedIncrement, setSpeedIncrement] = useState(() => {
-
-  });
-
-  console.log(`step: ${speedIncrement}`);
-
   const isRunningRef = useRef(isRunning);
   isRunningRef.current = isRunning;
-
-  console.log(`speed: ${simSpeedRef.current}`);
-
-  useEffect(() => {
-    if (simSpeed <= 0) {
-      setSpeedIncrement(0)
-    } else {
-      setSpeedIncrement(100)
-    }
-  }, [simSpeed])
 
   const runSimulation = useCallback(() => {
     if (!isRunningRef.current) {
@@ -135,6 +152,14 @@ function App() {
     setTimeout(runSimulation, simSpeedRef.current);
   }, []);
 
+  useEffect(() => {
+    if (simSpeed <= 0) {
+      setSpeedIncrement(0)
+    } else {
+      setSpeedIncrement(100)
+    }
+  }, [simSpeed])
+
   return (
     <div className="App">
       <Route exact path='/'>
@@ -143,8 +168,9 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
-          speedIncrement={speedIncrement}
-          setSimSpeed={setSimSpeed}
+          speedUpSim= {speedUpSim}
+          slowDownSim= {slowDownSim}
+          speedDisplay={speedDisplay}
           randomGrid={randomGrid}
           clearGrid={clearGrid}
           genCount={genCount}
@@ -155,6 +181,7 @@ function App() {
         />
 
         <Game
+          isRunning= {isRunning}
           squareSize={squareSize}
           grid={grid}
           setGrid={setGrid}

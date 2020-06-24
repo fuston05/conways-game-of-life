@@ -7,9 +7,10 @@ const Controls = ({
   isRunningRef,
   runSimulation,
   clearGrid,
+  speedDisplay,
   randomGrid,
-  speedIncrement,
-  setSimSpeed
+  speedUpSim,
+  slowDownSim,
 }) => {
 
   const disableStart= () => {
@@ -34,8 +35,12 @@ const Controls = ({
         {isRunningRef.current ? 'Stop' : 'Start'}
       </button>
       <button onClick= {() => randomGrid()}>Randomize Grid</button>
-      <button onClick= {() => setSimSpeed(s => s - speedIncrement)}>faster &raquo;</button>
-      <button onClick= {() => setSimSpeed(s => s + speedIncrement)}>Slower &laquo;</button>
+
+      <button onClick= {() => speedUpSim()}>faster &raquo;</button>
+
+      <span>{speedDisplay}</span>
+
+      <button onClick= {() => slowDownSim()}>Slower &laquo;</button>
       <button onClick= {() => clearGrid()}>Clear Board</button>
       <span>Generation # {genCount}</span>
     </div>

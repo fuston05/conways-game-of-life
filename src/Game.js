@@ -4,7 +4,7 @@ import produce from 'immer';
 //styles
 import './Game.scss';
 
-const Game = ({squareSize, grid, setGrid, colsCount }) => {
+const Game = ({isRunning, squareSize, grid, setGrid, colsCount }) => {
 
   return (
     <div
@@ -22,7 +22,10 @@ const Game = ({squareSize, grid, setGrid, colsCount }) => {
               key={`${i}-${k}`}
               onClick= {() => {
                 const newGrid= produce(grid, gridCopy => {
-                  gridCopy[i][k]= grid[i][k] ? 0 : 1;
+                  if(isRunning){
+                    return;
+                  }
+                  gridCopy[i][k]= grid[i][k] ? 0 : 1
                 })
                 setGrid(newGrid);
               }}
