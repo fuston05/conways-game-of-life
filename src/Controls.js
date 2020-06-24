@@ -1,12 +1,31 @@
 import React from 'react'
 import './Controls.scss';
 
-const Controls = ({setIsRunning, isRunningRef, runSimulation }) => {
+const Controls = ({
+  genCount,
+  setIsRunning,
+  isRunningRef,
+  runSimulation
+}) => {
+
+  const disableButton= () => {
+    const startButton= document.querySelector('.start');
+    startButton.setAttribute('disabled', 'true');
+    setTimeout(() => {
+      startButton && startButton.removeAttribute('disabled');
+
+    }, 1000)
+  }
+
   return (
     <div className='controlsCont'>
-      <button
+
+      <button className= 'start'
         onClick={() => {
+          disableButton();
+          // startButton && startButton.setAttribute('disabled', 'true')
           setIsRunning(!isRunningRef.current);
+          isRunningRef.current = true;
           runSimulation();
         }}
       >
@@ -15,7 +34,7 @@ const Controls = ({setIsRunning, isRunningRef, runSimulation }) => {
       <button>faster &raquo;</button>
       <button>Slower &laquo;</button>
       <button>Reset Board</button>
-      <span>Generation #</span>
+      <span>Generation # {genCount}</span>
     </div>
   )
 }

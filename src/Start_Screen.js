@@ -7,7 +7,7 @@ const Start= () => {
       <h1>Conway's Game of Life</h1>
       <p>Introduction</p>
       <p>Rules</p>
-      <button><Link to= '/game'>Enter Game</Link></button>
+      <button><Link to= '/game'>Check it out</Link></button>
     </div>
   )
 }

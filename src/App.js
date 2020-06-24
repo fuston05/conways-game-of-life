@@ -14,18 +14,20 @@ import './App.scss';
 const rowsCount = 30;
 const colsCount = rowsCount;
 
-const operations= [
-  [0, 1], 
-  [0, -1], 
-  [1, -1], 
-  [-1, 1], 
-  [1, 1], 
-  [-1, -1], 
-  [1, 0], 
+const operations = [
+  [0, 1],
+  [0, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+  [-1, -1],
+  [1, 0],
   [-1, 0]
 ];
 
 function App() {
+
+  const [genCount, setGenCount] = useState(0)
   const [squareSize] = useState(20);
   const [grid, setGrid] = useState(() => {
     const rows = [];
@@ -34,7 +36,9 @@ function App() {
       rows.push(Array.from(Array(colsCount), () => 0))
     }
     return rows;
+
   });
+
   const [isRunning, setIsRunning] = useState(false);
 
   const isRunningRef = useRef(isRunning);
@@ -44,7 +48,7 @@ function App() {
     if (!isRunningRef.current) {
       return;
     }
-
+    setGenCount(c => c + 1);
     setGrid((currentGrid) => {
       return produce(currentGrid, gridCopy => {
         //loop through every cell in the grid
@@ -52,23 +56,23 @@ function App() {
           for (let k = 0; k < colsCount; k++) {
 
             //get number of live neighbors
-            let neighbors= 0;
+            let neighbors = 0;
             operations.forEach(([x, y]) => {
-              const newI= i + x;
-              const newK= k + y;
+              const newI = i + x;
+              const newK = k + y;
               // check grid bounds
-              if( newI >= 0 && newI < rowsCount && newK >= 0 && newK < colsCount ){
-                neighbors+= currentGrid[newI][newK];
+              if (newI >= 0 && newI < rowsCount && newK >= 0 && newK < colsCount) {
+                neighbors += currentGrid[newI][newK];
               }//end if
             })
 
             // apply game rules logic
-            if(neighbors < 2 || neighbors > 3){
+            if (neighbors < 2 || neighbors > 3) {
               // kill cell
-              gridCopy[i][k]= 0;
-            }else if(currentGrid[i][k] === 0 && neighbors === 3){
+              gridCopy[i][k] = 0;
+            } else if (currentGrid[i][k] === 0 && neighbors === 3) {
               // bring to life
-              gridCopy[i][k]= 1;
+              gridCopy[i][k] = 1;
             }
           }//end cols loop
         }//end rows loop
@@ -86,8 +90,9 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
-          isRunningRef= {isRunningRef}
-          runSimulation= {runSimulation}
+          genCount={genCount}
+          isRunningRef={isRunningRef}
+          runSimulation={runSimulation}
           running={isRunning}
           setIsRunning={setIsRunning}
         />
