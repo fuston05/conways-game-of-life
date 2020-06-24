@@ -47,25 +47,6 @@ function App() {
     return rows;
   });
 
-  //functions
-  const speedUpSim= () => {
-    if(simSpeed === 100){
-      setSimSpeed(simSpeed);
-    }else if(simSpeed > 100){
-      setSimSpeed(s => s-100);
-      setSpeedDisplay(c => c + 1)
-    }
-  }
-
-  const slowDownSim= () => {
-    if(simSpeed === 1000){
-      setSimSpeed(simSpeed);
-    }else if(simSpeed <= 1900){
-      setSimSpeed(s => s+100);
-      setSpeedDisplay(c => c - 1)
-    }
-  }
-
   const clearGrid = () => {
     if(isRunning){
       alert('You must stop the game first');
@@ -168,9 +149,10 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
-          speedUpSim= {speedUpSim}
-          slowDownSim= {slowDownSim}
+          setSimSpeed= {setSimSpeed}
+          simSpeed= {simSpeed}
           speedDisplay={speedDisplay}
+          setSpeedDisplay= {setSpeedDisplay}
           randomGrid={randomGrid}
           clearGrid={clearGrid}
           genCount={genCount}
