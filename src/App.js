@@ -2,6 +2,9 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import produce from 'immer';
 
+//utils
+import {clearGrid} from './utils/gridFunctions';
+
 //components
 import Start from './Start_Screen';
 import Controls from './Controls';
@@ -46,27 +49,6 @@ function App() {
     }
     return rows;
   });
-
-  const clearGrid = () => {
-    if(isRunning){
-      alert('You must stop the game first');
-      return;
-    }
-    setIsRunning(false);
-    setGenCount(1);
-    setSpeedDisplay(1);
-    setSimSpeed(1000);
-
-    setGrid((currentGrid) => {
-      return produce(currentGrid, gridCopy => {
-        for (let i = 0; i < rowsCount; i++) {
-          for (let k = 0; k < colsCount; k++) {
-            gridCopy[i][k] = 0;
-          }
-        }
-      })
-    })
-  }
 
   const randomGrid = () => {
     if(isRunning){
@@ -149,13 +131,16 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
+          setGrid= {setGrid}
+          rowsCount= {rowsCount}
+          colsCount= {colsCount}
           setSimSpeed= {setSimSpeed}
           simSpeed= {simSpeed}
           speedDisplay={speedDisplay}
           setSpeedDisplay= {setSpeedDisplay}
           randomGrid={randomGrid}
-          clearGrid={clearGrid}
           genCount={genCount}
+          setGenCount= {setGenCount}
           isRunningRef={isRunningRef}
           runSimulation={runSimulation}
           running={isRunning}

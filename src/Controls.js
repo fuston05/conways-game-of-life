@@ -3,18 +3,22 @@ import './Controls.scss';
 
 //utils
 import {speedUpSim, slowDownSim} from './utils/speedControls';
+import {clearGrid} from './utils/gridFunctions';
 
 const Controls = ({
   genCount,
+  setGenCount,
   setIsRunning,
   isRunningRef,
   runSimulation,
-  clearGrid,
   speedDisplay,
   setSpeedDisplay,
   randomGrid,
   setSimSpeed,
-  simSpeed
+  simSpeed,
+  setGrid,
+  rowsCount,
+  colsCount
 }) => {
 
   const startButton = document.querySelector('.start');
@@ -53,7 +57,16 @@ const Controls = ({
         setSimSpeed,
         setSpeedDisplay
       )}>Slower &laquo;</button>
-      <button onClick={() => clearGrid()}>Clear Board</button>
+      <button onClick={() => clearGrid(
+        setSimSpeed,
+        setGrid,
+        rowsCount,
+        colsCount,
+        setIsRunning,
+        isRunningRef,
+        setGenCount,
+        setSpeedDisplay
+      )}>Clear Board</button>
 
       <span className='generationDisplay'>Generation # {genCount}</span>
     </div>
