@@ -28,7 +28,6 @@ const operations = [
 function App() {
 
   const clearGrid= () => {
-    console.log('clear fired');
     setIsRunning(false);
     setGenCount(1);
     setGrid((currentGrid) => {
@@ -36,6 +35,21 @@ function App() {
         for(let i= 0; i < rowsCount; i++){
           for(let k= 0; k < colsCount; k++){
             gridCopy[i][k]= 0;
+          }
+        }
+      })
+    })
+  }
+
+  const randomGrid= () => {
+    setIsRunning(false);
+    setGenCount(1);
+
+    setGrid((currentGrid) => {
+      return produce(currentGrid, gridCopy => {
+        for(let i= 0; i < rowsCount; i++){
+          for(let k= 0; k < colsCount; k++){
+            Math.random() < 0.5 ? gridCopy[i][k]= 0 : gridCopy[i][k]= 1
           }
         }
       })
@@ -106,6 +120,7 @@ function App() {
 
       <Route exact path='/game'>
         <Controls
+          randomGrid= {randomGrid}
           clearGrid= {clearGrid}
           genCount={genCount}
           isRunningRef={isRunningRef}

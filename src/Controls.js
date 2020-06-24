@@ -6,7 +6,8 @@ const Controls = ({
   setIsRunning,
   isRunningRef,
   runSimulation,
-  clearGrid
+  clearGrid,
+  randomGrid
 }) => {
 
   const disableStart= () => {
@@ -30,6 +31,7 @@ const Controls = ({
       >
         {isRunningRef.current ? 'Stop' : 'Start'}
       </button>
+      <button onClick= {() => randomGrid()}>Randomize Grid</button>
       <button>faster &raquo;</button>
       <button>Slower &laquo;</button>
       <button onClick= {() => clearGrid()}>Clear Board</button>
