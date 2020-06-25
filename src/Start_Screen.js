@@ -7,6 +7,7 @@ import './Start_Screen.scss';
 const Start= () => {
   return (
     <div className= 'descCont'>
+      <div className= 'mask'></div>
       <h1>Conway's Game of Life</h1>
       <p>
         Created by John Conway in 1970, in his persuit to create an intersting and 
