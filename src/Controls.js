@@ -60,7 +60,7 @@ const Controls = ({
           setSpeedDisplay
         )}>faster &raquo;</button>
   
-        <span className='speedDisplay'><i>Speed: </i>{speedDisplay}</span>
+        <span className='speedDisplay'>&nbsp;<i> Speed: </i>{speedDisplay}&nbsp;</span>
   
         <button onClick={() => slowDownSim(
           simSpeed,

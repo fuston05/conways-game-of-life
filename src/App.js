@@ -39,6 +39,8 @@ function App() {
   const [squareSize] = useState(rowsCount * 0.25);
   const [isRunning, setIsRunning] = useState(false);
 
+  const [cellColor, setCellColor]= useState('#006400')
+
   const [grid, setGrid] = useState(() => {
     const rows = [];
 
@@ -122,7 +124,7 @@ function App() {
             squareSize={squareSize}
             grid={grid}
             setGrid={setGrid}
-
+            cellColor= {cellColor}
             runSimulation={runSimulation}
             rowsCount={rowsCount}
             colsCount={colsCount}
@@ -136,6 +138,8 @@ function App() {
             isRunningRef={isRunningRef}
           />
           <SideBar
+            cellColor= {cellColor}
+            setCellColor= {setCellColor}
             setIsRunning={setIsRunning}
             isRunningRef={isRunningRef}
             setGenCount={setGenCount}
