@@ -102,39 +102,49 @@ function App() {
       </Route>
 
       <Route exact path='/game'>
-        <Controls
-          runSimulation={runSimulation}
-          setGrid={setGrid}
-          rowsCount={rowsCount}
-          colsCount={colsCount}
-          setSimSpeed={setSimSpeed}
-          simSpeed={simSpeed}
-          speedDisplay={speedDisplay}
-          setSpeedDisplay={setSpeedDisplay}
-          genCount={genCount}
-          setGenCount={setGenCount}
-          setIsRunning={setIsRunning}
-          isRunningRef={isRunningRef}
-        />
 
-        <div className='mainGameCont'>
+        {/* <Controls
+            runSimulation={runSimulation}
+            setGrid={setGrid}
+            rowsCount={rowsCount}
+            colsCount={colsCount}
+            setSimSpeed={setSimSpeed}
+            simSpeed={simSpeed}
+            speedDisplay={speedDisplay}
+            setSpeedDisplay={setSpeedDisplay}
+            genCount={genCount}
+            setGenCount={setGenCount}
+            setIsRunning={setIsRunning}
+            isRunningRef={isRunningRef}
+          /> */}
+        <div className='gameSideBarCont'>
           <Game
-            isRunning={isRunning}
             squareSize={squareSize}
             grid={grid}
             setGrid={setGrid}
+
+            runSimulation={runSimulation}
+            rowsCount={rowsCount}
+            colsCount={colsCount}
+            setSimSpeed={setSimSpeed}
+            simSpeed={simSpeed}
+            speedDisplay={speedDisplay}
+            setSpeedDisplay={setSpeedDisplay}
+            genCount={genCount}
+            setGenCount={setGenCount}
+            setIsRunning={setIsRunning}
+            isRunningRef={isRunningRef}
+          />
+          <SideBar
+            setIsRunning={setIsRunning}
+            isRunningRef={isRunningRef}
+            setGenCount={setGenCount}
+            setGrid={setGrid}
+            rowsCount={rowsCount}
             colsCount={colsCount}
           />
-
-          <SideBar
-            setIsRunning= {setIsRunning} 
-            isRunningRef= {isRunningRef}
-            setGenCount= {setGenCount}
-            setGrid= {setGrid}
-            rowsCount= {rowsCount}
-            colsCount= {colsCount}
-          />
         </div>
+
       </Route>
     </div>
   );

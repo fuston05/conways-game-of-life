@@ -3,8 +3,8 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 
   button{
     display: flex;
@@ -16,6 +16,13 @@
       cursor: pointer;
       opacity: 0.8;
     }
+  }
+
+  .speedControlsConst{
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
 
 }

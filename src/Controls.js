@@ -2,8 +2,8 @@ import React from 'react'
 import './Controls.scss';
 
 //utils
-import {speedUpSim, slowDownSim} from './utils/speedControls';
-import {clearGrid} from './utils/gridFunctions';
+import { speedUpSim, slowDownSim } from './utils/speedControls';
+import { clearGrid } from './utils/gridFunctions';
 
 const Controls = ({
   genCount,
@@ -42,19 +42,6 @@ const Controls = ({
         {isRunningRef.current ? 'Stop' : 'Start'}
       </button>
 
-      <button onClick={() => speedUpSim(
-        simSpeed,
-        setSimSpeed,
-        setSpeedDisplay
-      )}>faster &raquo;</button>
-
-      <span className='speedDisplay'>{speedDisplay}</span>
-
-      <button onClick={() => slowDownSim(
-        simSpeed,
-        setSimSpeed,
-        setSpeedDisplay
-      )}>Slower &laquo;</button>
       <button onClick={() => clearGrid(
         setSimSpeed,
         setGrid,
@@ -64,7 +51,23 @@ const Controls = ({
         isRunningRef,
         setGenCount,
         setSpeedDisplay
-      )}>Clear Board</button>
+      )}>Clear Grid</button>
+
+      <span className= 'speedControlsConst'>
+        <button onClick={() => speedUpSim(
+          simSpeed,
+          setSimSpeed,
+          setSpeedDisplay
+        )}>faster &raquo;</button>
+  
+        <span className='speedDisplay'><i>Speed: </i>{speedDisplay}</span>
+  
+        <button onClick={() => slowDownSim(
+          simSpeed,
+          setSimSpeed,
+          setSpeedDisplay
+        )}>Slower &laquo;</button>
+      </span>
 
       <span className='generationDisplay'>Generation # {genCount}</span>
     </div>
