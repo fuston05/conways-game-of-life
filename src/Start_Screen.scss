@@ -1,0 +1,42 @@
+.descCont {
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-image: url('./images/conways.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  position: relative;
+
+  .mask{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 2;
+  }
+
+  h1 {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 50px 0;
+    z-index: 3;
+  }
+
+  p,
+  ol {
+    z-index: 3;
+    width: 70%;
+    margin: 0 auto 25px auto;
+  }
+
+  ol {
+    z-index: 3;
+    list-style: upper-roman inside;
+  }
+
+}

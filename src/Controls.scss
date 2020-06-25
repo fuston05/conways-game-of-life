@@ -1,0 +1,28 @@
+.controlsCont {
+  margin: 0 0 10px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 10px 3px 10px;
+
+    &:hover{
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+
+  .speedControlsConst{
+    width: 240px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+}
