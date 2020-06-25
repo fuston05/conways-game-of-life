@@ -1,0 +1,22 @@
+.descCont{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  h1{
+    width: 100%;
+    text-align: center;
+    margin: 0 0 50px 0;
+  }
+
+  p, ol{
+    width: 70%;
+    margin: 0 auto 25px auto;
+  }
+
+  ol{
+    list-style: upper-roman inside;
+  }
+
+}

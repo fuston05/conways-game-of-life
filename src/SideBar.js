@@ -24,9 +24,10 @@ const SideBar = ({
 
   return (
     <div className= 'gameSideBar'>
-      <h2>Select Starting Pattern</h2>
+      <h2>Getting Started</h2>
       <br />
-      <p>~<i>Or manually click grid boxes, then click 'Start'</i>~</p>
+      <p>Select random below</p>
+      <p>Or you can Manually click grid boxes, then click 'Start'</p>
       <br />
 
       <button onClick={() => randomGrid(
@@ -40,7 +41,7 @@ const SideBar = ({
       <br />
       <hr />
       <br />
-      <label htmlFor= 'colorPicker'>Choose a Cell color </label>
+      <label htmlFor= 'colorPicker'>Live Cell color: </label>
       <input
         onChange= {(e) => {handleChange(e)}}
         name= 'colorPicker'

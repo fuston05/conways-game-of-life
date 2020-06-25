@@ -51,7 +51,7 @@ const Controls = ({
         isRunningRef,
         setGenCount,
         setSpeedDisplay
-      )}>Clear Grid</button>
+      )}>Clear Grid/Reset</button>
 
       <span className= 'speedControlsConst'>
         <button onClick={() => speedUpSim(
@@ -69,7 +69,7 @@ const Controls = ({
         )}>Slower &laquo;</button>
       </span>
 
-      <span className='generationDisplay'>Generation # {genCount}</span>
+      <span className='generationDisplay'>Generation: {genCount}</span>
     </div>
   )
 }
