@@ -19,10 +19,12 @@ This application is built using create-react-app, by Scott Fuston.
 
 [Check out the Live Site](https://conwaygameoflife.netlify.app/)   
 
+____________________________________________________________________________   
+
 ## Features   
 
 1.  User can change the color of the cells, both 'alive' and 'dead'.   
-2.  User can select a 'random' starting pattern.   
+2.  User can select a 'random' starting pattern while the game is stopped.   
 3.  User can manually select cell patterns for the starting pattern.   
 4.  User has the ability to increase and decrease simulation speed.   
 5.  User can reset the board if the game is not currently running.   
