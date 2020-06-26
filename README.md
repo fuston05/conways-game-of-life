@@ -17,5 +17,5 @@ ____________________________________________________________________________
 
 This application is built using create-react-app, by Scott Fuston.   
 
-[Check out the Live Site](conwaygameoflife.netlify.app/)   
+[Check out the Live Site](https://conwaygameoflife.netlify.app/)   
 
