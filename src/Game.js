@@ -8,7 +8,8 @@ import Controls from './Controls';
 import './Game.scss';
 
 const Game = ({
-  cellColor,
+  liveCellColor,
+  deadCellColor,
   runSimulation,
   isRunningRef,
   setIsRunning,
@@ -67,7 +68,7 @@ const Game = ({
                 style={{
                   width: squareSize,
                   height: squareSize,
-                  backgroundColor: grid[i][k] === 1 ? cellColor : undefined,
+                  backgroundColor: grid[i][k] === 1 ? liveCellColor : deadCellColor,
                   border: '1px solid black',
                   marginBottom: '-1px'
                 }} />
