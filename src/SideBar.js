@@ -13,13 +13,17 @@ const SideBar = ({
   setGrid, 
   rowsCount, 
   colsCount,
-  cellColor,
-  setCellColor
+  liveCellColor,
+  deadCellColor,
+  setLiveCellColor,
+  setDeadCellColor
 }) => {
-  const [formValue, setFormValue]= useState();
 
-  const handleChange= (e) => {
-    setCellColor(e.target.value);
+  const handleliveChange= (e) => {
+    setLiveCellColor(e.target.value);
+  }
+  const handleDeadChange= (e) => {
+    setDeadCellColor(e.target.value);
   }
 
   return (
@@ -41,12 +45,20 @@ const SideBar = ({
       <br />
       <hr />
       <br />
-      <label htmlFor= 'colorPicker'>Live Cell color: </label>
+      <label htmlFor= 'liveColorPicker'>Live Cell color: </label>
       <input
-        onChange= {(e) => {handleChange(e)}}
-        name= 'colorPicker'
+        onChange= {(e) => {handleliveChange(e)}}
+        name= 'liveColorPicker'
         type= 'color'
-        value= {cellColor}
+        value= {liveCellColor}
+      />
+      <br />
+      <label htmlFor= 'deadColorPicker'>Dead Cell color: </label>
+      <input
+        onChange= {(e) => {handleDeadChange(e)}}
+        name= 'deadColorPicker'
+        type= 'color'
+        value= {deadCellColor}
       />
     </div>
   )

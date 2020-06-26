@@ -39,7 +39,8 @@ function App() {
   const [squareSize] = useState(rowsCount * 0.25);
   const [isRunning, setIsRunning] = useState(false);
 
-  const [cellColor, setCellColor]= useState('#006400')
+  const [liveCellColor, setLiveCellColor] = useState('#006400');
+  const [deadCellColor, setDeadCellColor] = useState('#ffffff');
 
   const [grid, setGrid] = useState(() => {
     const rows = [];
@@ -104,27 +105,13 @@ function App() {
       </Route>
 
       <Route exact path='/game'>
-
-        {/* <Controls
-            runSimulation={runSimulation}
-            setGrid={setGrid}
-            rowsCount={rowsCount}
-            colsCount={colsCount}
-            setSimSpeed={setSimSpeed}
-            simSpeed={simSpeed}
-            speedDisplay={speedDisplay}
-            setSpeedDisplay={setSpeedDisplay}
-            genCount={genCount}
-            setGenCount={setGenCount}
-            setIsRunning={setIsRunning}
-            isRunningRef={isRunningRef}
-          /> */}
         <div className='gameSideBarCont'>
           <Game
             squareSize={squareSize}
             grid={grid}
             setGrid={setGrid}
-            cellColor= {cellColor}
+            liveCellColor={liveCellColor}
+            deadCellColor= {deadCellColor}
             runSimulation={runSimulation}
             rowsCount={rowsCount}
             colsCount={colsCount}
@@ -138,8 +125,10 @@ function App() {
             isRunningRef={isRunningRef}
           />
           <SideBar
-            cellColor= {cellColor}
-            setCellColor= {setCellColor}
+            liveCellColor={liveCellColor}
+            deadCellColor= {deadCellColor}
+            setDeadCellColor={setDeadCellColor}
+            setLiveCellColor={setLiveCellColor}
             setIsRunning={setIsRunning}
             isRunningRef={isRunningRef}
             setGenCount={setGenCount}
