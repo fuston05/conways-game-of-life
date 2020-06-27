@@ -1,26 +1,17 @@
-.gameSideBar{
+@import './vars.scss';
+@import './mixins.scss';
+
+.gameSideBar {
   border-radius: 5px;
   height: 100%;
   padding: 15px;
-  background-color: rgba(99, 143, 237, 0.1);
+  background-color: $sideBarBG;
 
-  label{
+  label {
     font-size: 1rem;
-
   }
 
-  button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2px 10px 3px 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-
-    &:hover{
-      cursor: pointer;
-      opacity: 0.8;
-    }
+  button {
+    @include button;
   }
-
 }

@@ -1,8 +1,7 @@
+@import './mixins.scss';
+
 .mainGameCont{
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 1.3rem;
+  @include dFlex(column, flex-start, center);
+  font-size: $pSize;
 }

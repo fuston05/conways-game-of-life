@@ -1,15 +1,13 @@
+@import './mixins.scss';
+
 .descCont {
   padding: 0;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  @include dFlex(column, flex-start, center);
   background-image: url('./images/conways.gif');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  z-index: 1;
   position: relative;
 
   .mask {
@@ -17,56 +15,37 @@
     width: 100%;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.87);
-    z-index: 2;
   }
 
   button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0 30px 0;
-    border-radius: 5px;
-    padding: 2px 20px 3px 20px;
-    background-color: cornflowerBlue;
-    z-index: 3;
-    
-    &:hover{
-      cursor: pointer;
-      background-color: lightBlue;
-      opacity: 0.8;
-    }
+    @include button;
+    z-index: 2;
   }
 
   h1 {
     width: 100%;
     text-align: center;
     margin: 30px 0;
-    z-index: 3;
+    z-index: 2;
   }
 
   .textCont {
     width: 100%;
     margin: 0 auto;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    @include dFlex(column, flex-start, flex-start);
     background-color: rgba(0,0,0, 0.8);
-    z-index: 3;
+    z-index: 2;
 
 
     p,
     ol {
-      z-index: 3;
       width: 70%;
       margin: 0 auto 25px auto;
     }
 
     ol {
-      z-index: 3;
       list-style: upper-roman inside;
     }
   }
-
 }

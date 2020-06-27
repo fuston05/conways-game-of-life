@@ -1,3 +1,5 @@
+@import './mixins.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -7,15 +9,10 @@
 .App {
   width: 100%;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+  @include dFlex(column, center, center);
+  
   .gameSideBarCont {
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    @include dFlex(row, space-evenly, flex-start);
   }
 }
