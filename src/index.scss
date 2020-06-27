@@ -1,3 +1,5 @@
+@import './vars.scss';
+
 *{
   font-family: 'Times New Roman', Times, serif;
 }
@@ -8,43 +10,43 @@ body{
 }
 
 h1{
-  font-size: 3rem;
-  color: #33619a;
+  font-size: $h1Size;
+  color: $h1Color;
 }
 
 h2{
-  font-size: 2.8rem;
-  color: #555;
+  font-size: $h2Size;
+  color: $h2Color;
 }
 
 h3{
-  font-size: 2.8rem;
-  color: #555;
+  font-size: $h3Size;
+  color: $h3Color;
 }
 
 h4{
-  font-size: 2.6rem;
-  color: #555;
+  font-size: $h4Size;
+  color: $h4Color;
 }
 
 h5{
-  font-size: 2.6rem;
-  color: #555;
+  font-size: $h5Size;
+  color: $h5Color;
 }
 
 p{
-  font-size: 1.3rem;
-  color: #aaa;
+  font-size: $pSize;
+  color: $pColor;
 }
 
 a{
-  font-size: 1.3rem;
-  color: #333;
+  font-size: $aSize;
+  color: $aColor;
   text-decoration: none;
 }
 
 li{
-  font-size: 1.3rem;
+  font-size: $pSize;
   color: #aaa;
 }
 
