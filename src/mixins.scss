@@ -9,7 +9,6 @@
 
 @mixin button {
   @include dFlex(row, center, center);
-  margin: 0 0 30px 0;
   border-radius: 5px;
   padding: 2px 20px 3px 20px;
   background-color: $buttonBG;

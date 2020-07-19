@@ -1,16 +1,35 @@
 @import './mixins.scss';
 
 .controlsCont {
-  margin: 0 0 10px 0;
-  width: 100%;
-  @include dFlex(row, space-between, flex-start);
+    margin: 0 0 10px 0;
+    width: 100%;
+    @include dFlex(column, space-between, center);
 
-  button{
-    @include button;
-  }
+    button{
+        margin: 30px 0 30px 0;
+    }
+    
+    .colorPickerCont {
+        width: 100%;
+        @include dFlex(row, space-evenly, center);
 
-  .speedControlsConst{
-    width: 240px;
-    @include dFlex(row, space-evenly, center);
-  }
+        label {
+            font-size: 1rem;
+        }
+
+    }
+
+    .speedControlsConst {
+
+        width: 100%;
+        @include dFlex(row, space-evenly, center);
+
+        .speedDisplay{
+            font-size: $pSize;
+        }
+    }
+
+    .generationDisplay{
+        font-size: $pSize;
+    }
 }
