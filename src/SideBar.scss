@@ -2,16 +2,12 @@
 @import './mixins.scss';
 
 .gameSideBar {
-  border-radius: 5px;
-  height: 100%;
-  padding: 15px;
-  background-color: $sideBarBG;
+    border-radius: 5px;
+    height: 100%;
+    padding: 15px;
+    background-color: $sideBarBG;
 
-  label {
-    font-size: 1rem;
-  }
-
-  button {
-    @include button;
-  }
+    button {
+        @include button;
+    }
 }
